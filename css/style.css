@@ -1,75 +1,90 @@
-
-/* ========================Index========================================= */
-body {
+/* ----index=login page--- */
+body, html {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background-color: #1e1e1e;
 }
 
 .home_page_body {
-  
+  background-image: url("../asset/background.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  color: rgb(255, 255, 255);
+  color: #fff;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.col01-row01-home  img {
-  width: 100px;
-  margin-left: 220px;
-  margin-top: 120px;
+/* Logo Image */
+.col01-row01-home img {
+  width: 140px;
+  margin-top: 30px;
+  animation: float 2s ease-in-out infinite;
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
-
-/* Headings and Paragraphs */
+/* Main Heading */
 #p1 {
-  font-size: 60px;
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
-  line-height: 1.2;
-  margin: 0 20px 20px 20px;
-  text-align: center;
+  font-size: 64px;
+  font-weight: 900;
+  color: #f53636; /* Yellow */
+  text-shadow: 3px 3px 0px #f0eded; /* Red Shadow */
+  margin: 20px 0 10px 0;
 }
 
+/* Subheading */
 #p2 {
-  font-size: 20px;
-  margin: 0 20px;
-  position: relative;
-  text-align: center;
-}
-
-/* Form Input Fields */
-#username, #password {
-  position: relative;
-  margin: 10px;
-  width: 200px;
-  height: 35px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.btn-warning {
-  background-color: black;
-  color: white;
-  border: 2px solid #b11111;
+  font-size: 30px;
+  color: #000000;
+  font-style: italic;
+  margin-bottom: 40px;
   font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+}
+
+/* Input Styles */
+#username, #password {
+  margin: 10px;
+  width: 260px;
+  height: 40px;
+  padding: 10px;
+  border: 2px solid #ffcc00;
+  border-radius: 10px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  font-weight: bold;
+}
+
+/* Login Button */
+.btn-warning {
+  background: linear-gradient(to right, #ff0000, #ffc107);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: 0.3s;
 }
 
 .btn-warning:hover {
-  background-color: #b11111;
-  color: black;
+  background: linear-gradient(to right, #ffc107, #ff0000);
+  color: #000;
 }
-
 
 
 /* ===============================Home======================================= */
@@ -86,6 +101,27 @@ body {
 }
 
 /* ===========================Add Customer================================================= */
+
+.custom-btn {
+  background-color: #d2273b;       
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.custom-btn:hover {
+  background-color: #5b1b1b;      
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 
 .Customer_bg{
     background-image: url(/asset/customer_bg.jpg);
@@ -138,6 +174,27 @@ img{
 
 
 /* ===============================item============================================= */
+
+.custom-btn-green {
+  background-color: #2ecc71;     
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.custom-btn-green:hover {
+  background-color: #27ae60;    
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
 
 .card {
     background: #fff;

@@ -222,80 +222,60 @@ function deleteItem(index) {
     });
 }
 
-// print bill
+async function printBill(orderID) {
+  try {
+    const response = await fetch(`http://localhost:8085/mos/order/get-all-byID/${orderID}`);
+    const data = await response.json();
+
+    const order = Array.isArray(data) ? data[0] : data;
+
+    if (!order || !order.orderID || !order.cusID || !order.date || !order.total) {
+      alert("Invalid order data!");
+      return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(20);
+    doc.setTextColor(255, 204, 0); 
+    doc.text("MOS BURGER SHOP", 106, 21, null, null, "center");
+
+    doc.setTextColor(204, 0, 0); 
+    doc.text("MOS BURGER SHOP", 105, 20, null, null, "center");
 
 
-function printBill(orderID) {
-  fetch(`http://localhost:8085 /mos/order/get-all-byID/${orderID}`, {
-    method: "GET",
-    redirect: "follow",
-  })
-    .then((response) => response.json())
-    .then((order) => {
-      console.log(order);
-      
-      const printContent = `
-        <html>
-          <head>
-            <style>
-              body { font-family: Arial, sans-serif; margin: 20px; }
-              .bill-header { text-align: center; margin-bottom: 20px; }
-              .bill-details { margin-bottom: 15px; }
-              .bill-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-              .bill-table th, .bill-table td { border: 1px solid #ddd; padding: 8px; }
-              .text-right { text-align: right; }
-              .total-row { font-weight: bold; }
-              @media print {
-                body { margin: 0; padding: 20px; }
-                .no-print { display: none !important; }
-              }
-            </style>
-          </head>
-          <body>
-            <div class="bill-header">
-              <h2>Mos Burger Shop</h2>
-              <p>324/01, Panadura, Colombo<br>Panadura, Sri Lanka</p>
-            </div>
+    doc.setFontSize(11);
+    doc.setTextColor(80, 80, 80);
+    doc.text("324/01, Panadura, Colombo", 105, 28, null, null, "center");
+    doc.text("Panadura, Sri Lanka", 105, 34, null, null, "center");
+    doc.line(20, 38, 190, 38); 
 
-            <div class="bill-details">
-              <p><strong>Order ID:</strong> #${orderID}</p>
-              <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-            <table class="bill-table">
-              <thead>
-                <tr>
-                  <th>Customer ID</th>
-                  <th>Date</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>${order.cusID}</td>
-                  <td>${order.date}</td>
-                  <td>Rs ${order.total}</td>
-                </tr>
-              </tbody>
-            </table>
+    doc.setFontSize(13);
+    doc.setTextColor( 0);
+    doc.text("Order Summary", 20, 46, null, null, );
 
-            <div style="margin-top: 30px; text-align: center;">
-              <p>Thank you for your business!</p>
-              <button class="no-print" onclick="window.print()">Print Bill</button>
-              <button class="no-print" onclick="window.close()">Close</button>
-            </div>
-          </body>
-        </html>
-      `;
+    doc.setFontSize(12);
+    doc.text(` Order ID     : #${order.orderID}`, 20, 54);
+    doc.text(` Customer ID  : ${order.cusID}`, 20, 62);
+    doc.text(` Date         : ${order.date}`, 20, 70);
 
-      // Open print window
-      const printWindow = window.open('', '_blank');
-      printWindow.document.open();
-      printWindow.document.write(printContent);
-      printWindow.document.close();
-      
-      // Automatically trigger print dialog
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
-    })
-    .catch((error) => console.log("Error fetching order details:", error));
+    doc.setFontSize(13);
+    doc.setTextColor(0, 128, 0); 
+    doc.text(`Total Amount   : Rs. ${order.total}`, 20, 82);
+
+    doc.setFontSize(12);
+    doc.setTextColor(100);
+    doc.text(" Thank you for choosing MOS Burger !", 105, 100, null, null, "center");
+    doc.text("Visit us again !", 105, 106, null, null, "center");
+
+    doc.setDrawColor(200, 200, 200);
+    doc.line(30, 112, 190, 112);
+
+    doc.save(`Order_${order.orderID}.pdf`);
+
+  } catch (error) {
+    console.error("Error while generating PDF bill:", error);
+    alert("Failed to generate bill. Please try again.");
+  }
 }
