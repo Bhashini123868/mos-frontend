@@ -156,6 +156,23 @@ input[type="number"]::placeholder {
 .category-btn:focus {
     outline: none;
 }
+.custom-btn {
+  background-color: #190644;      
+  color: white;
+  padding: 18px 30px;
+  border: none;
+  border-radius: 50px;           
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.custom-btn:hover {
+  background-color: #3722d7;
+  transform: scale(1.05);
+}
+
 
 @media (min-width: 768px) {
     .container {

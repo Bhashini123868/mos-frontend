@@ -72,7 +72,7 @@ function addItem() {
     .then((result) => {
       console.log(result);
       loadTable();
-      alert("Order placed successfully!");
+      alert("Item added successfully!");
 
       document.getElementById("ItemName").value = "";
       document.getElementById("ItemPrice").value = "";
